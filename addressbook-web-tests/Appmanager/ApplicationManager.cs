@@ -17,13 +17,28 @@ namespace WebAddressbookTests
         protected LoginHelper loginHelper;
         protected NavigationHelper navigator;
         protected GroupHelper grouphelper;
+        protected ContactHelper contacthelper;
 
         public ApplicationManager()
         {
-            loginHelper = new LoginHelper(driver);
-            navigator = new NavigationHelper(driver, baseURL);
-            grouphelper = new GroupHelper(driver);
+            driver = new FirefoxDriver();
+            baseURL = "https://localhost";
+
+            loginHelper = new LoginHelper(this);
+            navigator = new NavigationHelper(this, baseURL);
+            grouphelper = new GroupHelper(this);
+            contacthelper = new ContactHelper(this);
         }
+        public IWebDriver Driver
+        {
+            get
+            {
+                return driver;
+            }
+        
+        
+        }
+
         public void Stop()
         {
             try
@@ -55,6 +70,13 @@ namespace WebAddressbookTests
             get
             {
                 return grouphelper;
+            }
+        }
+        public ContactHelper Contact
+        {
+            get
+            {
+                return contacthelper;
             }
         }
     }
