@@ -8,13 +8,25 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactRemovalTests : TestBase
+    public class ContactRemovalTests : AuthTestBase
     {
         [Test]
         public void ContactRemovalTest()
         {
-            
-            app.Contact.Remove(2);
+            int index = 3;
+
+            if (app.Contact.IsExist(index))
+            {
+                app.Contact.Remove(index);
+            }
+            else
+            {
+                if (!app.Contact.IsExist(1))
+                {
+                    app.Contact.Create(new ContactData(""));
+                }
+                app.Contact.Remove(1);
+            }
 
         }
     }
